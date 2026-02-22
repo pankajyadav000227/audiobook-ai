@@ -7,6 +7,18 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+// Health check endpoint for Render
+app.get("/", (req, res) => {
+  res.json({
+    status: "ok",
+    message: "Audiobook AI Backend is running",
+    endpoints: {
+      generate: "POST /api/generate"
+    }
+  });
+});
+
+
 app.post("/api/generate", async (req, res) => {
   const topic = req.body.topic;
   try {
